@@ -12,6 +12,10 @@ class Game_place
 	puts " #{@board[7]} | #{@board[8]} | #{@board[9]} " + " ||  7 | 8 | 9"
   end
   
+  def turn (place, x_o)
+	@board[place]=x_o
+  end
+  
   def check_win
   end
   
