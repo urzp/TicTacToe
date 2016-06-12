@@ -31,6 +31,7 @@ class Game_place
   
   def turn (place, x_o)
 	@board[place]=x_o
+	draw_board
   end
   
   def check_win(player)
@@ -68,7 +69,8 @@ class Human < Player
   end
   
   def turn
-    
+    puts "take your turn and puts here number of place where you want to put #{self.marker}"
+	selection = gets.to_i
   end
 end
 
@@ -80,9 +82,5 @@ class Computer < Player
   def name
     @name
   end
-  
-  def turn
-  end
-
 end
 
