@@ -10,13 +10,14 @@ module TicTacToe
 	  player1.marker="O"
 	  player2.marker="X"	  
 	end
-	puts "Ok, #{player1.name} plays with marker \"#{player1.marker}\" and #{player2.name} plays with marker \"#{player2.marker}\" "
+	puts "Ok, #{player1.name} play with marker \"#{player1.marker}\" and #{player2.name} play with marker \"#{player2.marker}\" "
   end
 end 
 
 class Game_place
   def initialize()
     @board = Array.new(10, " ")
+	@board[0] = nil # unnecessary position of the board
   end
   
   def draw_board
@@ -39,6 +40,7 @@ class Game_place
   end
   
   def check_full_board
+    @board.all?{ |i| i != " "}
   end
 end
 
