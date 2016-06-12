@@ -15,6 +15,8 @@ module TicTacToe
 end 
 
 class Game_place
+  attr_reader :board
+  attr_writer :board
   def initialize()
     @board = Array.new(10, " ")
 	@board[0] = nil # unnecessary position of the board
@@ -81,6 +83,23 @@ class Computer < Player
   
   def name
     @name
+  end
+  
+  def turn(board, enimy)
+    if find_win_play(board, enimy) 
+	  return find_win_play(board, enimy) 
+	end
+  end
+private
+
+  def find_win_play(board, enimy)
+	LINES.each do |line|
+		if line.select{ |i| board[i] == self.marker }.size > 1 &&  line.select{ |i| board[i] == enimy.marker }.size == 0
+			return line.select{ |i| board[i] == " " }
+			break
+		end
+	end
+	return false
   end
 end
 
