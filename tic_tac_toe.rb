@@ -1,5 +1,19 @@
 LINES = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 
+module TicTacToe
+
+  def coin_toss (player1, player2)
+	if rand > 0.5 
+	  player1.marker="X"
+	  player2.marker="O"
+	 else
+	  player1.marker="O"
+	  player2.marker="X"	  
+	end
+	puts "Ok, #{player1.name} plays with marker \"#{player1.marker}\" and #{player2.name} plays with marker \"#{player2.marker}\" "
+  end
+end 
+
 class Game_place
   def initialize()
     @board = Array.new(10, " ")
@@ -29,21 +43,44 @@ class Game_place
 end
 
 class Player
+  def initialize()
+	@marker=nil
+  end
+  
+  def marker=(marker)
+    @marker=marker
+  end
+  
+  def marker
+     @marker
+  end
 end
 
 class Human < Player
   def initialize()
+    @name = "Player"
+  end
+  
+  def name
+    @name
   end
   
   def turn
+    
   end
 end
 
 class Computer < Player
   def initialize()
+    @name="computer"
+  end
+  
+  def name
+    @name
   end
   
   def turn
   end
+
 end
 
