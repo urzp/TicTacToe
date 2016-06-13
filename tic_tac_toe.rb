@@ -57,8 +57,6 @@ class Player
   def initialize()
 	@marker=nil
 	@@instans << self
-	puts @@instans
-	puts "+++++"
   end
   
   def instanses
@@ -73,8 +71,8 @@ class Player
      @marker
   end
   
-  def enimy?(player)
-	
+  def enimy?
+	@@instans.select{ |i| self != i}
   end
 end
 
