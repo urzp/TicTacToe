@@ -4,7 +4,11 @@ game=Game_place.new
 a_man=Human.new
 comp=Computer.new
 
+
+puts "********************************"
 coin_toss(a_man, comp, game)
+game.draw_board
+puts "********************************"
 
 while !game.check_full_board do
 	current_player = game.who_turn?

@@ -13,6 +13,7 @@ module TicTacToe
 	  game.start=player2	  
 	end
 	puts "Ok, #{player1.name} play with marker \"#{player1.marker}\" and #{player2.name} play with marker \"#{player2.marker}\" "
+    puts "#{game.who_turn?.name} will start"
  end
 end 
 
@@ -78,7 +79,7 @@ class Player
   end
   
   def enimy?
-	@@instans.select{ |i| self != i}
+	@@instans.select{ |i| self != i}[0]
   end
 end
 
@@ -170,3 +171,4 @@ end
 #    human input filter 
 #    optimisation draw_board
 #    create one method for find_win_play, find_win_play
+#    create one method turn for comp if 5 is empty
