@@ -31,9 +31,10 @@ class Game_place
 	puts " #{@board[7]} | #{@board[8]} | #{@board[9]} " + " ||  7 | 8 | 9"
   end
   
-  def turn (place, x_o)
-	@board[place]=x_o
+  def turn (place, player)
+	@board[place]=player.marker
 	draw_board
+	
   end
   
   def check_win(player)
@@ -45,11 +46,23 @@ class Game_place
   def check_full_board
     @board.all?{ |i| i != " "}
   end
+  
+  def Who_turn?
+    
+  end
 end
 
 class Player
+  @@instans=[]
   def initialize()
 	@marker=nil
+	@@instans << self
+	puts @@instans
+	puts "+++++"
+  end
+  
+  def instanses
+	puts @@instans
   end
   
   def marker=(marker)
@@ -59,11 +72,16 @@ class Player
   def marker
      @marker
   end
+  
+  def enimy?(player)
+	
+  end
 end
 
 class Human < Player
   def initialize()
     @name = "Player"
+	super
   end
   
   def name
@@ -79,6 +97,7 @@ end
 class Computer < Player
   def initialize()
     @name="computer"
+	super
   end
   
   def name
@@ -94,11 +113,9 @@ class Computer < Player
 	  return find_block_play(board, enimy)
 	end
 	
-	
 	if find_empty_line(board)
 	  return find_empty_line(board)
 	end
-	
 	
 	if find_epty_position(board)
 	  return find_epty_position(board)
@@ -140,6 +157,9 @@ private
     board.find_index { |val| val == " "}
   end
 end
+
+
+
 
 # ------ Nots ------
 #  is needed: 
