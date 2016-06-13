@@ -94,8 +94,14 @@ class Computer < Player
 	  return find_block_play(board, enimy)
 	end
 	
+	
 	if find_empty_line(board)
 	  return find_empty_line(board)
+	end
+	
+	
+	if find_epty_position(board)
+	  return find_epty_position(board)
 	end
   end
   
@@ -127,6 +133,11 @@ private
 	    return line.select{ |i| board[i] == " " }[0]
 	  end
 	end
+	return false
+  end
+  
+  def find_epty_position(board)
+    board.find_index { |val| val == " "}
   end
 end
 
