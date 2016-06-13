@@ -32,7 +32,7 @@ class Game_place
   end
   
   def turn (place, x_o)
-	@board[place]=x_o
+	@board[place.to_i]=x_o
 	draw_board
   end
   
@@ -87,9 +87,13 @@ class Computer < Player
   
   def turn(board, enimy)
     if find_win_play(board, enimy) 
-	  return find_win_play(board, enimy) 
+	  return find_win_play(board, enimy)
+	end
+	if find_block_play(board, enimy) 
+	  return find_block_play(board, enimy) 
 	end
   end
+  
 private
 
   def find_win_play(board, enimy)
@@ -101,5 +105,20 @@ private
 	end
 	return false
   end
+  
+  def find_block_play(board, enimy)
+	LINES.each do |line|
+		if line.select{ |i| board[i] == enimy.marker }.size > 1 &&  line.select{ |i| board[i] == self.marker }.size == 0
+			return line.select{ |i| board[i] == " " }
+			break
+		end
+	end
+	return false
+  end
 end
 
+# ------ Nots ------
+#  is needed: 
+#    human input filter 
+#    optimisation draw_board
+#    create one method for find_win_play, find_win_play
