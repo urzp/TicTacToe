@@ -32,7 +32,7 @@ class Game_place
   end
   
   def turn (place, x_o)
-	@board[place.to_i]=x_o
+	@board[place]=x_o
 	draw_board
   end
   
@@ -89,8 +89,13 @@ class Computer < Player
     if find_win_play(board, enimy) 
 	  return find_win_play(board, enimy)
 	end
+	
 	if find_block_play(board, enimy) 
-	  return find_block_play(board, enimy) 
+	  return find_block_play(board, enimy)
+	end
+	
+	if find_empty_line(board)
+	  return find_empty_line(board)
 	end
   end
   
@@ -99,7 +104,7 @@ private
   def find_win_play(board, enimy)
 	LINES.each do |line|
 		if line.select{ |i| board[i] == self.marker }.size > 1 &&  line.select{ |i| board[i] == enimy.marker }.size == 0
-			return line.select{ |i| board[i] == " " }
+			return line.select{ |i| board[i] == " " }[0]
 			break
 		end
 	end
@@ -109,11 +114,19 @@ private
   def find_block_play(board, enimy)
 	LINES.each do |line|
 		if line.select{ |i| board[i] == enimy.marker }.size > 1 &&  line.select{ |i| board[i] == self.marker }.size == 0
-			return line.select{ |i| board[i] == " " }
+			return line.select{ |i| board[i] == " " }[0]
 			break
 		end
 	end
 	return false
+  end
+  
+  def find_empty_line(board)
+	LINES.each do |line|
+	  if line.all?{ |i| board[i] == " "}
+	    return line.select{ |i| board[i] == " " }[0]
+	  end
+	end
   end
 end
 
