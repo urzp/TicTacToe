@@ -35,9 +35,19 @@ class Game_place
   end
   
   def turn (place, player)
-	@board[place]=player.marker
-	draw_board
-	@turn = player.enimy?
+    if !place_empty?(place)
+	  puts "This place has been already done"
+	  puts "Take an empty place"
+	  return false
+	else 
+	  @board[place]=player.marker
+	  draw_board
+	  @turn = player.enimy?
+	end
+  end
+  
+  def place_empty?(place)
+	board[place] == " "
   end
   
   def start=(player)
@@ -94,8 +104,15 @@ class Human < Player
   end
   
   def turn(board)
+    selection = 0
     puts "take your turn and puts here number of place where you want to put #{self.marker}"
-	selection = gets.to_i
+	while !selection.between?(1, 9) 
+	  selection = gets.to_i
+	  if !selection.between?(1, 9)
+	    puts "Wrong place number! Please put the number between 1..9 " 
+	  end
+	end
+	return selection
   end
 end
 
