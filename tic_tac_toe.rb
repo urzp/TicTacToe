@@ -34,7 +34,7 @@ class Game_place
   def turn (place, player)
 	@board[place]=player.marker
 	draw_board
-	
+	@turn = player.enimy?
   end
   
   def check_win(player)
@@ -48,7 +48,7 @@ class Game_place
   end
   
   def Who_turn?
-    
+    @turn
   end
 end
 
