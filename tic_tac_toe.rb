@@ -18,11 +18,12 @@ module TicTacToe
 end 
 
 class Game_place
-  attr_reader :board
+  attr_reader :board, :stop
   attr_writer :board
   def initialize()
     @board = Array.new(10, " ")
 	@board[0] = nil # unnecessary position of the board
+	@stop = false
   end
   
   def draw_board
@@ -42,6 +43,8 @@ class Game_place
 	else 
 	  @board[place]=player.marker
 	  draw_board
+	  check_win(player)
+	  check_full_board
 	  @turn = player.enimy?
 	end
   end
@@ -55,13 +58,18 @@ class Game_place
   end
   
   def check_win(player)
-	LINES.any? do |line|
-	  line.all { |i| i == player.marker}
+    if LINES.any?{ |line| line.all? { |i| @board[i] == player.marker} }
+	  	puts "#{player.name} win!!!"
+		@stop = true
+		return true
 	end
   end
   
   def check_full_board
-    @board.all?{ |i| i != " "}
+    if @board.all?{ |i| i != " "}
+	  puts "Isn't any empty place"
+	  @stop = true
+	end
   end
   
   def who_turn?
@@ -187,7 +195,6 @@ end
 
 # ------ Nots ------
 #  is needed: 
-#    human input filter 
 #    optimisation draw_board
 #    create one method for find_win_play, find_win_play
 #    create one method turn for comp if 5 is empty
