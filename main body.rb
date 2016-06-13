@@ -4,9 +4,12 @@ game=Game_place.new
 a_man=Human.new
 comp=Computer.new
 
-coin_toss(a_man, comp)
+coin_toss(a_man, comp, game)
 
 while !game.check_full_board do
-
-
+	current_player = game.who_turn?
+	player_chose = current_player.turn(game.board)
+	game.turn(player_chose, current_player)
+	
+	
 end

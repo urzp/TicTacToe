@@ -92,7 +92,7 @@ class Human < Player
     @name
   end
   
-  def turn
+  def turn(board)
     puts "take your turn and puts here number of place where you want to put #{self.marker}"
 	selection = gets.to_i
   end
@@ -108,7 +108,7 @@ class Computer < Player
     @name
   end
   
-  def turn(board, enimy)
+  def turn(board, enimy=self.enimy?)
     if find_win_play(board, enimy) 
 	  return find_win_play(board, enimy)
 	end
