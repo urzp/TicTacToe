@@ -110,6 +110,8 @@ class Computer < Player
   end
   
   def turn(board, enimy=self.enimy?)
+    return 5 if board[5] == " "
+  
     if find_win_play(board, enimy) 
 	  return find_win_play(board, enimy)
 	end
