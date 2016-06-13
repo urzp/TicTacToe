@@ -2,16 +2,18 @@ LINES = [[1,2,3],[4,5,6],[7,8,9],[1,4,7],[2,5,8],[3,6,9],[1,5,9],[3,5,7]]
 
 module TicTacToe
 
-  def coin_toss (player1, player2)
+  def coin_toss (player1, player2, game)
 	if rand > 0.5 
 	  player1.marker="X"
 	  player2.marker="O"
+	  game.start=player1
 	 else
 	  player1.marker="O"
-	  player2.marker="X"	  
+	  player2.marker="X"	
+	  game.start=player2	  
 	end
 	puts "Ok, #{player1.name} play with marker \"#{player1.marker}\" and #{player2.name} play with marker \"#{player2.marker}\" "
-  end
+ end
 end 
 
 class Game_place
@@ -37,6 +39,10 @@ class Game_place
 	@turn = player.enimy?
   end
   
+  def start=(player)
+    @turn = player
+  end
+  
   def check_win(player)
 	LINES.any? do |line|
 	  line.all { |i| i == player.marker}
@@ -47,7 +53,7 @@ class Game_place
     @board.all?{ |i| i != " "}
   end
   
-  def Who_turn?
+  def who_turn?
     @turn
   end
 end
