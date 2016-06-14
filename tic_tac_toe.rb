@@ -27,11 +27,12 @@ class Game_place
   end
   
   def draw_board
+    view_line = "---+---+---" + " || ---+---+---"
     puts "-Game Board-||-Number place of board-"
 	puts " #{@board[1]} | #{@board[2]} | #{@board[3]} " + " ||  1 | 2 | 3"
-	puts "---+---+---" + " || ---+---+---"
+	puts  view_line
 	puts " #{@board[4]} | #{@board[5]} | #{@board[6]} " + " ||  4 | 5 | 6"
-	puts "---+---+---" + " || ---+---+---"
+	puts view_line
 	puts " #{@board[7]} | #{@board[8]} | #{@board[9]} " + " ||  7 | 8 | 9"
   end
   
@@ -190,6 +191,22 @@ private
   end
 end
 
+include TicTacToe
+
+game=Game_place.new
+a_man=Human.new
+comp=Computer.new
+
+puts "********************************"
+coin_toss(a_man, comp, game)
+game.draw_board
+puts "********************************"
+
+while !game.stop do
+	current_player = game.who_turn?
+	player_chose = current_player.turn(game.board)
+	game.turn(player_chose, current_player)
+end
 
 
 include TicTacToe
@@ -210,8 +227,3 @@ while !game.stop do
 end
 
 
-# ------ Nots ------
-#  is needed: 
-#    optimisation draw_board
-#    create one method for find_win_play, find_win_play
-#    create one method turn for comp if 5 is empty
